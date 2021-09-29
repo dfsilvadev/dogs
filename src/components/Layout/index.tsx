@@ -10,10 +10,10 @@ interface LayoutProps {
 
 export const Layout = ({ children }: LayoutProps) => {
   return (
-    <div className={styles.wrapper}>
+    <main className={styles.wrapper}>
       <Header />
-      <div className="container">{children}</div>
+      <section className="container">{children}</section>
       <Footer />
-    </div>
+    </main>
   );
 };
