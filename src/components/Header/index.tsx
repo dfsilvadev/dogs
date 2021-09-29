@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 import styles from "./styles.module.scss";
 
@@ -13,7 +13,7 @@ export const Header = () => {
             aria-label="Logotipo dogs - um desenho de cachorro sorrindo"
           />
         </Link>
-        <Link to="/login">Login</Link>
+        <NavLink to="/login">Login</NavLink>
       </nav>
     </header>
   );
