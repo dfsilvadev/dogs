@@ -17,7 +17,6 @@ const InputDefault: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
   { label, id, error, ...props }: InputProps,
   ref
 ) => {
-  console.log(error);
   return (
     <div className={styles["form-group"]}>
       <label htmlFor={id}>{label}</label>
