@@ -1,4 +1,5 @@
 import { createContext, ReactNode } from "react";
+import { useCookies } from "../hooks/useCookies";
 import { api } from "../services/api";
 
 interface AuthContextProviderProps {
@@ -20,17 +21,25 @@ export const UseAuthContext = createContext({} as AuthContextData);
 export const UseAuthContextProvider = ({
   children,
 }: AuthContextProviderProps) => {
+  const { cookies } = useCookies();
+
   async function signIn({ username, password }: Credentials) {
     try {
-      const response = await api.post(
-        "json/jwt-auth/v1/token",
-        { username, password },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await api
+        .post(
+          "json/jwt-auth/v1/token",
+          { username, password },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .then((response) => response.data);
+
+      const { token } = response;
+
+      cookies.set("dogs.token", token);
 
       console.log(response);
     } catch (err) {
