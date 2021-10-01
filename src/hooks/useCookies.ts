@@ -10,12 +10,10 @@ interface Cookies {
 const cookies = {} as Cookies;
 
 export function useCookies() {
-  const [token, setToken] = useState("");
-
-  useEffect(() => {
-    const response = cookies.get("dogs.token");
-    if (response) setToken(response);
-  }, []);
+  const [token, setToken] = useState(() => {
+    const { "dogs.token": token } = parseCookies();
+    return token;
+  });
 
   try {
     cookies.set = useCallback((key, token) => {
@@ -34,6 +32,11 @@ export function useCookies() {
   } catch (e) {
     throw new Error("There is no token in cookies");
   }
+
+  useEffect(() => {
+    const { "dogs.token": response } = parseCookies();
+    setToken(response);
+  }, []);
 
   return { token, cookies };
 }
