@@ -1,8 +1,10 @@
 import { BrowserRouter } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
-import { Layout } from "./components/Layout";
 import { UseAuthContextProvider } from "./contexts/useAuth";
 import { MyRoutes as Routes } from "./routes";
+
+import { Layout } from "./components/Layout";
 
 import "./styles/global.scss";
 
@@ -13,6 +15,7 @@ function App() {
         <Layout>
           <Routes />
         </Layout>
+        <ToastContainer autoClose={3000} />
       </BrowserRouter>
     </UseAuthContextProvider>
   );

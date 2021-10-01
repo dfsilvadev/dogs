@@ -1,3 +1,5 @@
+@import "react-toastify/dist/ReactToastify.css";
+
 :root {
   --white: #fff;
   --gray-50: #f7f8fa;
@@ -9,7 +11,7 @@
 
   --green-500: #00ff5f;
 
-  --red-500: #f31;
+  --red-500: #e5001b;
 
   --yellow-500: #ffbb11;
 
@@ -114,6 +116,13 @@ img {
   @media (min-width: 1200px) {
     max-width: 1160px;
   }
+}
+
+.Toastify__toast-theme--colored.Toastify__toast--success {
+  background: var(--purple-400) !important;
+}
+.Toastify__toast-theme--colored.Toastify__toast--error {
+  background: var(--red-500) !important;
 }
 
 /* SCROLLBAR */
