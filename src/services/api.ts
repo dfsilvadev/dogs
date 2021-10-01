@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: "https://dogsapi.origamid.dev/json",
+  baseURL: "https://dogsapi.origamid.dev/",
 });
