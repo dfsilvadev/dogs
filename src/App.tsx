@@ -14,8 +14,8 @@ function App() {
       <BrowserRouter>
         <Layout>
           <Routes />
+          <ToastContainer autoClose={3000} />
         </Layout>
-        <ToastContainer autoClose={3000} />
       </BrowserRouter>
     </UseAuthContextProvider>
   );
