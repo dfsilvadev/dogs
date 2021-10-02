@@ -6,10 +6,10 @@ import { useAuth } from "../../hooks/useAuth";
 import styles from "./styles.module.scss";
 
 export const Header = () => {
-  const { user } = useAuth();
-
+  const { user, isLogged, loading } = useAuth();
+  console.log(isLogged);
+  console.log(loading);
   console.log(user);
-
   return (
     <header className={styles.header}>
       <nav className="container">
@@ -20,11 +20,17 @@ export const Header = () => {
             aria-label="Logotipo dogs - um desenho de cachorro sorrindo"
           />
         </Link>
-        {!!user ? (
-          <NavLink to="/conta">
-            {user.username}
-            <RiUserSettingsLine />
-          </NavLink>
+        {!!isLogged ? (
+          <>
+            {loading ? (
+              <p>Carregando</p>
+            ) : (
+              <NavLink to="/conta">
+                {user.nome}
+                <RiUserSettingsLine />
+              </NavLink>
+            )}
+          </>
         ) : (
           <NavLink to="/login">Login</NavLink>
         )}
