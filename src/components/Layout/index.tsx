@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+
 import { Footer } from "../Footer";
 import { Header } from "../Header";
 
@@ -12,9 +13,7 @@ export const Layout = ({ children }: LayoutProps) => {
   return (
     <main className={styles.wrapper}>
       <Header />
-      <section className="container">
-        <div className={styles.content}>{children}</div>
-      </section>
+      <div className={styles.content}>{children}</div>
       <Footer />
     </main>
   );
