@@ -6,10 +6,7 @@ import { useAuth } from "../../hooks/useAuth";
 import styles from "./styles.module.scss";
 
 export const Header = () => {
-  const { user, isLogged, loading } = useAuth();
-  console.log(isLogged);
-  console.log(loading);
-  console.log(user);
+  const { user, isLogged } = useAuth();
   return (
     <header className={styles.header}>
       <nav className="container">
@@ -21,16 +18,10 @@ export const Header = () => {
           />
         </Link>
         {!!isLogged ? (
-          <>
-            {loading ? (
-              <p>Carregando</p>
-            ) : (
-              <NavLink to="/conta">
-                {user.nome}
-                <RiUserSettingsLine />
-              </NavLink>
-            )}
-          </>
+          <NavLink to="/conta">
+            {user.nome}
+            <RiUserSettingsLine />
+          </NavLink>
         ) : (
           <NavLink to="/login">Login</NavLink>
         )}
