@@ -10,14 +10,14 @@ import "./styles/global.scss";
 
 function App() {
   return (
-    <UseAuthContextProvider>
-      <BrowserRouter>
+    <BrowserRouter>
+      <UseAuthContextProvider>
         <Layout>
           <Routes />
           <ToastContainer autoClose={3000} />
         </Layout>
-      </BrowserRouter>
-    </UseAuthContextProvider>
+      </UseAuthContextProvider>
+    </BrowserRouter>
   );
 }
 
