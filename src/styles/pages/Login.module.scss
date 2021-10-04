@@ -1,0 +1,22 @@
+.wrapper {
+  min-height: 95vh;
+  display: grid;
+  grid-template-columns: 1fr;
+
+  @media (min-width: 576px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+
+    &::before {
+      display: block;
+      content: "";
+      background: url("../../assets/bg-login.jpg") no-repeat center center;
+      background-size: cover;
+    }
+  }
+}
+
+.form {
+  display: flex;
+  align-items: center;
+}
