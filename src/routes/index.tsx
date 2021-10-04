@@ -7,10 +7,7 @@ export const MyRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="login/" element={<Login />}>
-        <Route path="cadastrar" element={<p>Cadastrar</p>} />
-        <Route path="esqueci-a-senha" element={<p>Esqueci minha senha</p>} />
-      </Route>
+      <Route path="login/*" element={<Login />} />
     </Routes>
   );
 };
