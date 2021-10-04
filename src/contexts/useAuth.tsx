@@ -1,4 +1,11 @@
-import { createContext, ReactNode, useEffect, useState } from "react";
+import {
+  createContext,
+  ReactNode,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
+import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 
 import { useCookies } from "../hooks/useCookies";
@@ -12,6 +19,7 @@ interface AuthContextData {
   user: User;
   isLogged: boolean;
   loading: boolean;
+  signOut: () => void;
   signIn: (credentials: Credentials) => Promise<void>;
   getUserData: (token: string) => Promise<void>;
 }
@@ -37,6 +45,24 @@ export const UseAuthContextProvider = ({
   const [isLogged, setIsLogged] = useState(false);
   const [loading, setLoading] = useState(false);
   const { cookies, token } = useCookies();
+  const navigate = useNavigate();
+
+  const signOut = useCallback(() => {
+    try {
+      cookies.remove("dogs.token");
+      setIsLogged(false);
+      setUser({} as User);
+    } catch (err) {
+      if (err instanceof Error) {
+        toast.error(err.message, {
+          theme: "colored",
+          icon: false,
+        });
+      }
+    } finally {
+      navigate("/login");
+    }
+  }, [cookies, navigate]);
 
   async function signIn({ username, password }: Credentials) {
     try {
@@ -54,12 +80,12 @@ export const UseAuthContextProvider = ({
         .then((response) => response.data);
 
       const { token } = response;
-
       cookies.set("dogs.token", token);
-      setIsLogged(true);
-      await getUserData(token);
 
-      console.log(response);
+      await getUserData(token);
+      setIsLogged(true);
+
+      navigate("/");
     } catch (err) {
       setIsLogged(false);
       setLoading(false);
@@ -82,23 +108,16 @@ export const UseAuthContextProvider = ({
         })
         .then((response) => response.data);
 
-      const { id, nome, username, email } = data;
-      setUser({
-        id,
-        nome,
-        email,
-        username,
-      });
-
+      setUser(data);
       setIsLogged(true);
     } catch (err) {
+      setIsLogged(false);
       if (err instanceof Error) {
         toast.error(err.message, {
           theme: "colored",
           icon: false,
         });
       }
-      setIsLogged(false);
     }
   }
 
@@ -112,7 +131,7 @@ export const UseAuthContextProvider = ({
 
   return (
     <UseAuthContext.Provider
-      value={{ user, isLogged, loading, getUserData, signIn }}
+      value={{ user, isLogged, loading, signOut, getUserData, signIn }}
     >
       {children}
     </UseAuthContext.Provider>
