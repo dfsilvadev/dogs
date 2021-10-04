@@ -2,8 +2,9 @@ import styles from "./styles.module.scss";
 
 export const Footer = () => {
   return (
-    <div>
-      <h1>Footer</h1>
-    </div>
+    <footer className={styles.footer}>
+      <img src={"/images/logo.svg"} alt="" />
+      <p>Dogs &bull; Alguns direitos resevados.</p>
+    </footer>
   );
 };
