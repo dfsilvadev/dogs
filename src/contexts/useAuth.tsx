@@ -21,12 +21,17 @@ interface AuthContextData {
   loading: boolean;
   signOut: () => void;
   signIn: (credentials: Credentials) => Promise<void>;
+  signUp: (signUpData: SignUpData) => Promise<void>;
   getUserData: (token: string) => Promise<void>;
 }
 
 interface Credentials {
   username: string;
   password: string;
+}
+
+interface SignUpData extends Credentials {
+  email: string;
 }
 
 interface User {
@@ -98,6 +103,37 @@ export const UseAuthContextProvider = ({
     }
   }
 
+  async function signUp({ username, email, password }: SignUpData) {
+    try {
+      setLoading(true);
+      await api
+        .post(
+          "api/user",
+          { username, email, password },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .then((response) => response);
+      toast.success("Usuário cadastrado com sucesso", {
+        theme: "colored",
+        icon: false,
+      });
+      navigate("login");
+    } catch (err) {
+      setIsLogged(false);
+      setLoading(false);
+      toast.error("Erro ao cadastrar usuário", {
+        theme: "colored",
+        icon: false,
+      });
+    } finally {
+      setLoading(false);
+    }
+  }
+
   async function getUserData(token: string) {
     try {
       const data = await api
@@ -131,7 +167,7 @@ export const UseAuthContextProvider = ({
 
   return (
     <UseAuthContext.Provider
-      value={{ user, isLogged, loading, signOut, getUserData, signIn }}
+      value={{ user, isLogged, loading, signOut, getUserData, signIn, signUp }}
     >
       {children}
     </UseAuthContext.Provider>
