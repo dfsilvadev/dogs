@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -15,18 +15,15 @@ interface Credentials {
   password: string;
 }
 
-const createUserFormSchema = yup.object({
-  username: yup.string().required("E-mail obrigatório."),
-  password: yup
-    .string()
-    .required("Senha obrigatória.")
-    .min(6, "A senha deve conter 6 ou mais caracteres"),
+const signInUserSchema = yup.object({
+  username: yup.string().required("Usuário obrigatório."),
+  password: yup.string().required("Senha obrigatória."),
 });
 
 export const SignInForm = () => {
   const { signIn } = useAuth();
   const { register, handleSubmit, formState } = useForm({
-    resolver: yupResolver(createUserFormSchema),
+    resolver: yupResolver(signInUserSchema),
   });
 
   const { errors } = formState;
