@@ -29,7 +29,7 @@ const createUserFormSchema = yup.object({
 });
 
 export const SignUpForm = () => {
-  const { signIn } = useAuth();
+  const { signUp } = useAuth();
   const { register, handleSubmit, formState } = useForm({
     resolver: yupResolver(createUserFormSchema),
   });
@@ -37,7 +37,7 @@ export const SignUpForm = () => {
   const { errors } = formState;
 
   async function handleSignIn(credentials: Credentials) {
-    await signIn(credentials);
+    await signUp(credentials);
   }
 
   return (
