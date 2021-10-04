@@ -118,6 +118,27 @@ img {
   }
 }
 
+.title {
+  font-family: Spectral, georgia;
+  font-weight: 700;
+  font-size: 3rem;
+  margin-bottom: 0.625rem;
+  position: relative;
+  z-index: 1;
+
+  &::before {
+    display: block;
+    content: "";
+    width: 1.5rem;
+    height: 1.5rem;
+    background: var(--purple-400);
+    border-radius: 0.25rem;
+    position: absolute;
+    bottom: 0.875rem;
+    z-index: -1;
+  }
+}
+
 .Toastify__toast-theme--colored.Toastify__toast--success {
   background: var(--purple-400) !important;
 }
