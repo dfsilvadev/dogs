@@ -7,6 +7,7 @@ import styles from "./styles.module.scss";
 
 export const Header = () => {
   const { user, isLogged } = useAuth();
+
   return (
     <header className={styles.header}>
       <nav className="container">
@@ -17,9 +18,9 @@ export const Header = () => {
             aria-label="Logotipo dogs - um desenho de cachorro sorrindo"
           />
         </Link>
-        {!!isLogged ? (
-          <NavLink to="/conta">
-            {user.nome}
+        {isLogged ? (
+          <NavLink to="/minha-conta">
+            {user?.nome}
             <RiUserSettingsLine />
           </NavLink>
         ) : (
