@@ -1,5 +1,5 @@
+import { Link, useRouteMatch } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -27,6 +27,7 @@ export const SignInForm = () => {
   });
 
   const { errors } = formState;
+  const { url } = useRouteMatch();
 
   async function handleSignIn(credentials: Credentials) {
     await signIn(credentials);
@@ -54,13 +55,13 @@ export const SignInForm = () => {
       </form>
       <p>
         Esqueceu a senha?
-        <Link to="esqueci-a-senha">Clique aqui</Link>
+        <Link to={`${url}/esqueci-a-senha`}>Clique aqui</Link>
       </p>
       <div className={styles.registration}>
         <h1 className="title">Cadastre-se</h1>
         <p>
           Ainda não tem uma conta?
-          <Link to="cadastrar">Clique aqui</Link>
+          <Link to={`${url}/cadastrar`}>Clique aqui</Link>
         </p>
       </div>
     </div>
