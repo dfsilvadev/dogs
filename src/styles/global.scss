@@ -118,6 +118,11 @@ img {
   }
 }
 
+a.active {
+  background-color: var(--purple-400) !important;
+  color: var(--white);
+}
+
 .title {
   font-family: Spectral, georgia;
   font-weight: 700;
