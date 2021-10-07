@@ -5,7 +5,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import { useNavigate } from "react-router";
+import { useHistory } from "react-router";
 import { toast } from "react-toastify";
 
 import { useCookies } from "../hooks/useCookies";
@@ -16,7 +16,7 @@ interface AuthContextProviderProps {
 }
 
 interface AuthContextData {
-  user: User;
+  user: User | null;
   isLogged: boolean;
   loading: boolean;
   signOut: () => void;
@@ -46,17 +46,16 @@ export const UseAuthContext = createContext({} as AuthContextData);
 export const UseAuthContextProvider = ({
   children,
 }: AuthContextProviderProps) => {
-  const [user, setUser] = useState<User>({} as User);
-  const [isLogged, setIsLogged] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+  const isLogged = !!user;
   const [loading, setLoading] = useState(false);
   const { cookies, token } = useCookies();
-  const navigate = useNavigate();
+  const history = useHistory();
 
   const signOut = useCallback(() => {
     try {
       cookies.remove("dogs.token");
-      setIsLogged(false);
-      setUser({} as User);
+      setUser(null);
     } catch (err) {
       if (err instanceof Error) {
         toast.error(err.message, {
@@ -65,14 +64,14 @@ export const UseAuthContextProvider = ({
         });
       }
     } finally {
-      navigate("/login");
+      history.push("/login");
     }
-  }, [cookies, navigate]);
+  }, [cookies, history]);
 
   async function signIn({ username, password }: Credentials) {
     try {
       setLoading(true);
-      const response = await api
+      await api
         .post(
           "jwt-auth/v1/token",
           { username, password },
@@ -82,17 +81,14 @@ export const UseAuthContextProvider = ({
             },
           }
         )
-        .then((response) => response.data);
-
-      const { token } = response;
-      cookies.set("dogs.token", token);
-
-      await getUserData(token);
-      setIsLogged(true);
-
-      navigate("/");
+        .then((response) => {
+          const { data } = response;
+          const { token } = data;
+          cookies.set("dogs.token", token);
+          getUserData(token);
+        });
+      history.push("/minha-conta");
     } catch (err) {
-      setIsLogged(false);
       setLoading(false);
       toast.error("Usuário ou senha incorreto.", {
         theme: "colored",
@@ -106,24 +102,23 @@ export const UseAuthContextProvider = ({
   async function signUp({ username, email, password }: SignUpData) {
     try {
       setLoading(true);
-      await api
-        .post(
-          "api/user",
-          { username, email, password },
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        )
-        .then((response) => response);
+      await api.post(
+        "api/user",
+        { username, email, password },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
       toast.success("Usuário cadastrado com sucesso", {
         theme: "colored",
         icon: false,
       });
-      navigate("login");
+
+      history.push("/login");
     } catch (err) {
-      setIsLogged(false);
       setLoading(false);
       toast.error("Erro ao cadastrar usuário", {
         theme: "colored",
@@ -136,24 +131,27 @@ export const UseAuthContextProvider = ({
 
   async function getUserData(token: string) {
     try {
-      const data = await api
+      setLoading(true);
+      await api
         .get("api/user", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         })
-        .then((response) => response.data);
-
-      setUser(data);
-      setIsLogged(true);
+        .then((response) => {
+          const { data } = response;
+          setUser(data);
+        });
     } catch (err) {
-      setIsLogged(false);
+      setLoading(false);
       if (err instanceof Error) {
         toast.error(err.message, {
           theme: "colored",
           icon: false,
         });
       }
+    } finally {
+      setLoading(false);
     }
   }
 
