@@ -5,7 +5,7 @@ import { UseAuthContextProvider } from "../contexts/useAuth";
 import { Layout } from "../components/Layout";
 import { Home } from "../pages/Home";
 import { Login } from "../pages/Login";
-import { Conta } from "../pages/Account";
+import { Account } from "../pages/Account";
 import { PrivateRoute } from "./private";
 
 export const MyRoutes = () => {
@@ -15,7 +15,7 @@ export const MyRoutes = () => {
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/login" component={Login} />
-          <PrivateRoute path="/minha-conta" component={Conta} />
+          <PrivateRoute path="/minha-conta" component={Account} />
         </Switch>
       </Layout>
     </UseAuthContextProvider>
