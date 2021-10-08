@@ -8,10 +8,10 @@ export const LoginRoutes = () => {
   return (
     <Switch>
       <Route exact path={path} component={SignInForm} />
-      {/* <Route
-            path="esqueci-a-senha"
-            component={<p>Esqueci minha senha</p>}
-          /> */}
+      <Route
+        path={`${path}/esqueci-a-senha`}
+        component={() => <p>Esqueci minha senha</p>}
+      />
       <Route path={`${path}/cadastrar`} component={SignUpForm} />
     </Switch>
   );

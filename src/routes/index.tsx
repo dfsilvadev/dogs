@@ -16,6 +16,7 @@ export const MyRoutes = () => {
           <Route path="/" exact component={Home} />
           <Route path="/login" component={Login} />
           <PrivateRoute path="/minha-conta" component={Account} />
+          <Route path="*" component={() => <h1>Not Found</h1>} />
         </Switch>
       </Layout>
     </UseAuthContextProvider>

@@ -6,6 +6,7 @@ import { converteToArray } from "../../utils/converteToArray";
 import { removeEmptyElements } from "../../utils/removeEmptyElements";
 
 import styles from "../../styles/pages/Account.module.scss";
+import { AccountRoutes } from "../../routes/account";
 
 export const Account = () => {
   const [title, setTitle] = useState("");
@@ -35,6 +36,7 @@ export const Account = () => {
     <section className={styles.wrapper}>
       <div className="container">
         <AccountNavHeader title={title} />
+        <AccountRoutes />
       </div>
     </section>
   );
