@@ -9,11 +9,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 export function Button({ children, handleSignIn, ...props }: ButtonProps) {
   return (
-    <button
-      onClick={handleSignIn}
-      {...props}
-      className={`${styles.btn} ${styles["simple-btn"]}`}
-    >
+    <button onClick={handleSignIn} {...props} className={styles["btn-default"]}>
       {children}
     </button>
   );

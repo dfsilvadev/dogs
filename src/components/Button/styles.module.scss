@@ -1,45 +1,14 @@
-.btn {
+.btn-default {
   display: inline-block;
-  position: relative;
   padding: 0.625rem 2.25rem;
-  font-size: 0.875rem;
-  letter-spacing: 1px;
-  font-weight: 600;
-  text-align: center;
+  border-radius: 0.25rem;
   color: var(--white);
-  background: var(--purple-300);
-  border: 1px solid var(--gray-150);
+  background: var(--purple-400);
   transition: ease-out 0.5s;
-}
+  border: transparent;
 
-.simple-btn {
-  &::after,
-  &::before {
-    position: absolute;
-    content: "";
-    width: 0;
-    height: 0;
-    transition: 0.5s;
-  }
-
-  &::after {
-    top: -3px;
-    left: -3px;
-    border-top: 3px solid transparent;
-    border-left: 3px solid transparent;
-  }
-
-  &::before {
-    bottom: -3px;
-    right: -3px;
-    border-bottom: 3px solid transparent;
-    border-right: 3px solid transparent;
-  }
-
-  &:hover::after,
-  &:hover::before {
-    width: calc(50% + 3px);
-    height: calc(50% + 3px);
-    border-color: var(--purple-400);
+  &:hover {
+    box-shadow: 0 0 60px rgba(0, 0, 0, 0.05);
+    background-color: var(--purple-300);
   }
 }
