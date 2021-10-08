@@ -6,7 +6,7 @@ import { useAuth } from "../../hooks/useAuth";
 import styles from "./styles.module.scss";
 
 export const Header = () => {
-  const { user, isLogged } = useAuth();
+  const { user, isLogged, loading } = useAuth();
 
   return (
     <header className={styles.header}>
@@ -18,13 +18,22 @@ export const Header = () => {
             aria-label="Logotipo dogs - um desenho de cachorro sorrindo"
           />
         </Link>
-        {isLogged ? (
-          <NavLink to="/minha-conta">
-            {user?.nome}
-            <RiUserSettingsLine />
-          </NavLink>
+
+        {loading && !user?.nome ? (
+          <span>
+            <p>Carregando...</p>
+          </span>
         ) : (
-          <NavLink to="/login">Login</NavLink>
+          <>
+            {isLogged ? (
+              <NavLink to="/minha-conta">
+                {user?.nome}
+                <RiUserSettingsLine />
+              </NavLink>
+            ) : (
+              <NavLink to="/login">Login</NavLink>
+            )}
+          </>
         )}
       </nav>
     </header>
