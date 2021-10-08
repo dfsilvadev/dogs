@@ -54,7 +54,7 @@ export const AccoutNavLinks = () => {
 
           <NavLink to={`${url}/novo-post`}>
             <TiPlusOutline />
-            {match && <p>Nova Postage</p>}
+            {match && <p>Nova Postagem</p>}
           </NavLink>
           <span onClick={signOut}>
             <TiExportOutline />
@@ -65,21 +65,17 @@ export const AccoutNavLinks = () => {
         <nav className={styles.nav}>
           <NavLink to={`${url}`} exact>
             <TiThLargeOutline />
-            {match && <p>Postagens</p>}
           </NavLink>
 
           <NavLink to={`${url}/estatisticas`}>
             <TiChartAreaOutline />
-            {match && <p>Estatísticas</p>}
           </NavLink>
 
           <NavLink to={`${url}/novo-post`}>
             <TiPlusOutline />
-            {match && <p>Nova Postage</p>}
           </NavLink>
           <span onClick={signOut}>
             <TiExportOutline />
-            {match && <p>Sair</p>}
           </span>
         </nav>
       )}
