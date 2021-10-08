@@ -41,20 +41,24 @@ export const PhotoPost = () => {
           error={errors.name}
           {...register("name")}
         />
-        <Input
-          type="number"
-          label="Peso"
-          id="weight"
-          error={errors.weight}
-          {...register("weight")}
-        />
-        <Input
-          type="number"
-          label="Idade"
-          id="age"
-          error={errors.age}
-          {...register("age")}
-        />
+
+        <div className={styles.group}>
+          <Input
+            type="number"
+            label="Peso"
+            id="weight"
+            error={errors.weight}
+            {...register("weight")}
+          />
+          <Input
+            type="number"
+            label="Idade"
+            id="age"
+            error={errors.age}
+            {...register("age")}
+          />
+        </div>
+
         <Input
           type="file"
           label="Selecionar Foto"

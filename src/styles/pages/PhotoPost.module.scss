@@ -1,5 +1,7 @@
 .new-post-wrapper {
+  margin: 0 auto;
   margin-top: 1.25rem;
+  width: min(23.75rem, 100%);
   height: auto;
   padding: 1.25rem;
   border-radius: 0.25rem;
@@ -16,23 +18,22 @@
     padding: 1.25rem;
     display: grid;
     gap: 1rem;
-    border-bottom: 1px solid var(--gray-100);
-
-    @media (min-width: 768px) {
-      border-bottom: none;
-      border-right: 1px solid var(--gray-100);
-    }
-  }
-
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
   }
 }
+
+.group {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
 .wrap-preview {
-  padding: 1.25rem;
+  width: min(23.75rem, 100%);
+  display: grid;
+  place-items: center;
 }
 .preview {
-  width: 23.75rem;
+  width: 15rem;
   max-height: 23.75rem;
   border-radius: 0.25rem;
   background-position: center center;
