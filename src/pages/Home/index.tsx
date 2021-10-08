@@ -1,16 +1,11 @@
-import { useAuth } from "../../hooks/useAuth";
-
-import { Button } from "../../components/Button";
+import styles from "../../styles/pages/Home.module.scss";
 
 export const Home = () => {
-  const { signOut } = useAuth();
-
   return (
-    <div className="container">
-      <p>Home</p>
-      <Button type="button" onClick={signOut}>
-        Sair
-      </Button>
-    </div>
+    <section className={styles["home-wrapper"]}>
+      <div className="container">
+        <h1>Home</h1>
+      </div>
+    </section>
   );
 };
