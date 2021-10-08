@@ -2,8 +2,6 @@
 .mobile-nav {
   display: grid;
   gap: 0.5rem;
-  place-items: center;
-  box-shadow: 0 0 60px rgba(0, 0, 0, 0.05);
 
   a,
   span {
@@ -29,6 +27,7 @@
   height: 5rem;
   padding: 0.5rem 0;
   grid-template-columns: repeat(4, 4rem);
+  place-items: center;
 
   a,
   span {
@@ -51,10 +50,11 @@
   position: absolute;
   top: 5rem;
   right: 0;
-  grid-template-rows: repeat(4, 3rem);
-
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.05);
   transform: translateX(-20px);
   opacity: 0;
+  pointer-events: none;
+  grid-template-rows: repeat(4, 3rem);
 
   a,
   span {
@@ -63,7 +63,6 @@
     border-radius: 0.25rem;
     display: flex;
     align-items: center;
-    justify-content: space-between;
   }
 
   svg {
@@ -75,6 +74,7 @@
   transition: 0.2s;
   transform: initial;
   opacity: 1;
+  pointer-events: initial;
   z-index: 5;
 }
 

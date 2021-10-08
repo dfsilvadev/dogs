@@ -16,7 +16,7 @@ export const Account = () => {
     const newPaths = removeEmptyElements(paths);
 
     if (newPaths.length <= 1) {
-      setTitle("Minha Conta");
+      setTitle("Postagens");
       return;
     }
 

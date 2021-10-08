@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   TiChartAreaOutline,
   TiExportOutline,
   TiPlusOutline,
   TiThLargeOutline,
 } from "react-icons/ti";
-import { NavLink, useRouteMatch } from "react-router-dom";
+import { NavLink, useLocation, useRouteMatch } from "react-router-dom";
 
 import { useAuth } from "../../hooks/useAuth";
 import { useMediaMatch } from "../../hooks/useMediaMatch";
@@ -17,8 +17,11 @@ export const AccoutNavLinks = () => {
   const { url } = useRouteMatch();
   const { signOut } = useAuth();
   const { match } = useMediaMatch("(max-width: 575px)");
+  const { pathname } = useLocation();
 
-  console.log(match);
+  useEffect(() => {
+    setToggleMenu(false);
+  }, [pathname]);
 
   return (
     <>
@@ -32,30 +35,54 @@ export const AccoutNavLinks = () => {
           onClick={() => setToggleMenu(!toggleMenu)}
         ></button>
       )}
-      <nav
-        className={`${match ? styles["mobile-nav"] : styles.nav} ${
-          toggleMenu && styles["mobile-nav-active"]
-        }`}
-      >
-        <NavLink to={`${url}`} exact>
-          <TiThLargeOutline />
-          {match && <p>Minhas fotos</p>}
-        </NavLink>
 
-        <NavLink to={`${url}/estatisticas`}>
-          <TiChartAreaOutline />
-          {match && <p>Estatísticas</p>}
-        </NavLink>
+      {match ? (
+        <nav
+          className={`${styles["mobile-nav"]} ${
+            toggleMenu && styles["mobile-nav-active"]
+          }`}
+        >
+          <NavLink to={`${url}`} exact>
+            <TiThLargeOutline />
+            {match && <p>Postagens</p>}
+          </NavLink>
 
-        <NavLink to={`${url}/novo-post`}>
-          <TiPlusOutline />
-          {match && <p>Nova Postage</p>}
-        </NavLink>
-        <span onClick={signOut}>
-          <TiExportOutline />
-          {match && <p>Sair</p>}
-        </span>
-      </nav>
+          <NavLink to={`${url}/estatisticas`}>
+            <TiChartAreaOutline />
+            {match && <p>Estatísticas</p>}
+          </NavLink>
+
+          <NavLink to={`${url}/novo-post`}>
+            <TiPlusOutline />
+            {match && <p>Nova Postage</p>}
+          </NavLink>
+          <span onClick={signOut}>
+            <TiExportOutline />
+            {match && <p>Sair</p>}
+          </span>
+        </nav>
+      ) : (
+        <nav className={styles.nav}>
+          <NavLink to={`${url}`} exact>
+            <TiThLargeOutline />
+            {match && <p>Postagens</p>}
+          </NavLink>
+
+          <NavLink to={`${url}/estatisticas`}>
+            <TiChartAreaOutline />
+            {match && <p>Estatísticas</p>}
+          </NavLink>
+
+          <NavLink to={`${url}/novo-post`}>
+            <TiPlusOutline />
+            {match && <p>Nova Postage</p>}
+          </NavLink>
+          <span onClick={signOut}>
+            <TiExportOutline />
+            {match && <p>Sair</p>}
+          </span>
+        </nav>
+      )}
     </>
   );
 };

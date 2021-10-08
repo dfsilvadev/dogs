@@ -9,6 +9,7 @@ export const useMediaMatch = (screenValue: string) => {
       setMatch(matches);
     }
 
+    changeMatch();
     window.addEventListener("resize", changeMatch);
 
     return () => {
