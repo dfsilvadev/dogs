@@ -19,8 +19,11 @@ const InputDefault: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
 ) => {
   return (
     <div className={styles["form-group"]}>
-      <label htmlFor={id}>{label}</label>
+      <label htmlFor={id} className={styles.label}>
+        {label}
+      </label>
       <input id={id} className={styles["form-control"]} {...props} ref={ref} />
+      <span className={styles.bar}></span>
       {error && <p className={styles.error}>{error.message}</p>}
     </div>
   );
