@@ -1,5 +1,7 @@
 import { ChangeEvent, useState } from "react";
+import { useHistory } from "react-router";
 import { toast } from "react-toastify";
+
 import { api } from "../services/api";
 
 interface PostData {
@@ -16,9 +18,12 @@ interface Preview {
 
 export const usePost = (token: string) => {
   const [preview, setPreview] = useState<Preview>({} as Preview);
+  const [sending, setSending] = useState(false);
+  const history = useHistory();
 
   async function sendPost(post: PostData) {
     try {
+      setSending(true);
       const formData = new FormData();
       formData.append("img", post.photo[0]);
       formData.append("nome", post.name);
@@ -30,11 +35,16 @@ export const usePost = (token: string) => {
           Authorization: `Bearer ${token}`,
         },
       });
+
+      history.push("/minha-conta");
     } catch (err) {
+      setSending(false);
       toast.error("Erro ao publicar seu post.", {
         theme: "colored",
         icon: false,
       });
+    } finally {
+      setSending(false);
     }
   }
 
@@ -45,5 +55,5 @@ export const usePost = (token: string) => {
     });
   }
 
-  return { preview, postPreview, sendPost };
+  return { preview, postPreview, sending, sendPost };
 };
