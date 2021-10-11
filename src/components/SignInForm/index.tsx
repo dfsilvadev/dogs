@@ -41,6 +41,7 @@ export const SignInForm = () => {
           type="text"
           label="Usuário"
           id="username"
+          placeholder="Jhon Doe"
           error={errors.username}
           {...register("username")}
         />
@@ -48,6 +49,7 @@ export const SignInForm = () => {
           type="password"
           label="Senha"
           id="password"
+          placeholder="Sua senha"
           error={errors.password}
           {...register("password")}
         />
