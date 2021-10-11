@@ -2,8 +2,25 @@
   width: 100%;
   padding: 1.25rem 1rem;
   display: grid;
-  grid-template-rows: 1.25rem auto;
+  grid-template-rows: 2fr 1fr;
   gap: 1.25rem;
+
+  p {
+    display: flex;
+    align-items: center;
+  }
+
+  a {
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-decoration: underline;
+    transition: color 0.2s ease-out;
+    margin-left: 0.5rem;
+
+    &:hover {
+      color: var(--purple-400);
+    }
+  }
 }
 
 .form {

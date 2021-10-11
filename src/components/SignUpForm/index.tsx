@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -8,7 +9,6 @@ import { Button } from "../Button";
 import { Input } from "../Input";
 
 import styles from "./styles.module.scss";
-import { Breadcrumbs } from "../Breadcrumbs";
 
 interface Credentials {
   username: string;
@@ -42,13 +42,13 @@ export const SignUpForm = () => {
 
   return (
     <div className={`${styles["wrapper-form"]} float-left`}>
-      <Breadcrumbs />
       <form onSubmit={handleSubmit(handleSignIn)} className={styles.form}>
         <h1 className="title">Cadastre-se</h1>
         <Input
           type="text"
           label="Usuário"
           id="username"
+          placeholder="JhonDoe"
           error={errors.username}
           {...register("username")}
         />
@@ -56,6 +56,7 @@ export const SignUpForm = () => {
           type="email"
           label="E-mail"
           id="email"
+          placeholder="jhondoe@email.com"
           error={errors.email}
           {...register("email")}
         />
@@ -63,11 +64,19 @@ export const SignUpForm = () => {
           type="password"
           label="Senha"
           id="password"
+          placeholder="Sua senha"
           error={errors.password}
           {...register("password")}
         />
         <Button type="submit">Cadastrar</Button>
       </form>
+      <div className={styles.registration}>
+        <h1 className="title">Login</h1>
+        <p>
+          Já tem uma conta?
+          <Link to="/login">Clique aqui</Link>
+        </p>
+      </div>
     </div>
   );
 };
