@@ -1,23 +1,19 @@
 .new-post-wrapper {
   margin: 0 auto;
   margin-top: 1.25rem;
-  width: min(23.75rem, 100%);
-  height: auto;
-  padding: 1.25rem;
-  border-radius: 0.25rem;
-  background-color: var(--white);
-  box-shadow: 0 0 60px rgba(0, 0, 0, 0.05);
-
   display: grid;
-  grid-template-rows: auto;
-  gap: 0.5rem;
-  place-items: center;
+  grid-template-rows: repeat(2, 1fr);
+  gap: 1.25rem;
 
   form {
-    width: 100%;
-    padding: 1.25rem;
     display: grid;
-    gap: 1rem;
+    grid-template-rows: repeat(4, 1fr);
+    gap: 1.25rem;
+  }
+
+  @media (min-width: 576px) {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
   }
 }
 
@@ -28,22 +24,10 @@
 }
 
 .wrap-preview {
-  width: min(23.75rem, 100%);
   display: grid;
   place-items: center;
-}
-.preview {
-  width: 15rem;
-  max-height: 23.75rem;
-  border-radius: 0.25rem;
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
-}
-
-.preview::after {
-  content: "";
-  display: block;
-  height: 0;
-  padding-bottom: 100%;
+  border-radius: 0.25rem;
 }

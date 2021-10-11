@@ -70,17 +70,13 @@ export const PhotoPost = () => {
         <Button type="submit">Postar</Button>
       </form>
 
-      <div className={styles["wrap-preview"]}>
-        {preview.url ? (
-          <div
-            className={styles.preview}
-            style={{
-              backgroundImage: `url('${preview.url}')`,
-            }}
-          ></div>
-        ) : (
-          <h4>Nenhum arquivo selecionado</h4>
-        )}
+      <div
+        className={styles["wrap-preview"]}
+        style={{
+          backgroundImage: `url('${preview.url}')`,
+        }}
+      >
+        {!preview.url && <h4>Nenhum arquivo selecionado</h4>}
       </div>
     </section>
   );
