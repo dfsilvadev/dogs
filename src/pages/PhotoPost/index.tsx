@@ -21,7 +21,7 @@ const postSchema = yup.object({
 
 export const PhotoPost = () => {
   const { token } = useCookies();
-  const { preview, postPreview, sendPost } = usePost(token);
+  const { preview, postPreview, sending, sendPost } = usePost(token);
 
   const { register, handleSubmit, formState } = useForm({
     resolver: yupResolver(postSchema),
@@ -61,13 +61,19 @@ export const PhotoPost = () => {
 
         <Input
           type="file"
-          label="Selecionar Foto"
+          label="Buscar Foto"
           id="photo"
           error={errors.photo}
           {...register("photo")}
           onChange={postPreview}
         />
-        <Button type="submit">Postar</Button>
+        {sending ? (
+          <Button type="submit" disabled>
+            Enviando...
+          </Button>
+        ) : (
+          <Button type="submit">Postar</Button>
+        )}
       </form>
 
       <div
