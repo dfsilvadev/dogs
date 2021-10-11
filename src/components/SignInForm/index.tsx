@@ -41,7 +41,7 @@ export const SignInForm = () => {
           type="text"
           label="Usuário"
           id="username"
-          placeholder="Jhon Doe"
+          placeholder="JhonDoe"
           error={errors.username}
           {...register("username")}
         />
