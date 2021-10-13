@@ -2,12 +2,18 @@
   margin: 0 auto;
   margin-top: 1.25rem;
   display: grid;
+  grid-template-rows: repeat(2, 1fr);
   gap: 1.25rem;
 
   form {
     display: grid;
     grid-template-rows: repeat(4, 1fr);
     gap: 1.25rem;
+  }
+
+  @media (min-width: 575px) {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
   }
 }
 
@@ -21,7 +27,7 @@
   display: grid;
   place-items: center;
   background-position: center center;
-  background-size: cover;
+  background-size: contain;
   background-repeat: no-repeat;
   border-radius: 0.25rem;
 }
