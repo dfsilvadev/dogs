@@ -1,0 +1,38 @@
+.post {
+  display: grid;
+  border-radius: 0.25rem;
+  overflow: hidden;
+  cursor: pointer;
+
+  &:nth-child(2) {
+    grid-column: initial;
+    grid-row: initial;
+
+    @media (min-width: 576px) {
+      grid-column: 2/4;
+      grid-row: span 2;
+    }
+  }
+
+  img,
+  span {
+    grid-area: 1/1;
+  }
+
+  span {
+    background-color: rgba(0, 0, 0, 0.3);
+    color: var(--white);
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      font-size: 1.5rem;
+      margin-right: 0.25rem;
+    }
+  }
+
+  &:hover span {
+    display: flex;
+  }
+}
