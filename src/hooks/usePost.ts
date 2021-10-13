@@ -4,11 +4,17 @@ import { toast } from "react-toastify";
 
 import { api } from "../services/api";
 
-interface PostData {
+interface PostSendData {
   name: string;
   weight: string;
   age: string;
   photo?: any;
+}
+
+interface PostsGetData {
+  page: number;
+  total: number;
+  user: any;
 }
 
 interface Preview {
@@ -18,10 +24,11 @@ interface Preview {
 
 export const usePost = (token: string) => {
   const [preview, setPreview] = useState<Preview>({} as Preview);
+  const [loading, setLoading] = useState(false);
   const [sending, setSending] = useState(false);
   const history = useHistory();
 
-  async function sendPost(post: PostData) {
+  async function sendPost(post: PostSendData) {
     try {
       setSending(true);
       const formData = new FormData();
@@ -48,6 +55,23 @@ export const usePost = (token: string) => {
     }
   }
 
+  async function getPosts({ page, total, user }: PostsGetData) {
+    try {
+      setLoading(true);
+      const data = await api
+        .get(`api/photo/?_page=${page}&_total=${total}&_user=${user}`)
+        .then((response) => response.data);
+
+      console.log(data);
+
+      return data;
+    } catch (err) {
+      setLoading(false);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   function postPreview({ target }: ChangeEvent<HTMLInputElement>) {
     setPreview({
       url: URL.createObjectURL((target.files as FileList)[0]),
@@ -55,5 +79,5 @@ export const usePost = (token: string) => {
     });
   }
 
-  return { preview, postPreview, sending, sendPost };
+  return { preview, postPreview, sending, loading, sendPost, getPosts };
 };
