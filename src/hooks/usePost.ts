@@ -62,8 +62,6 @@ export const usePost = (token: string) => {
         .get(`api/photo/?_page=${page}&_total=${total}&_user=${user}`)
         .then((response) => response.data);
 
-      console.log(data);
-
       return data;
     } catch (err) {
       setLoading(false);
